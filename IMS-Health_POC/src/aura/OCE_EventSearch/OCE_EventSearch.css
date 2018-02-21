@@ -1,0 +1,22 @@
+.THIS {
+}
+.THIS .xc-hidden {
+   display:none !important;
+}
+.THIS.apollo .card-header {
+    border-bottom: 0.0625rem solid #ced3d6;
+    padding-bottom: 0.85rem;
+}
+.THIS.apollo .card-block {
+    padding-right: 0;
+    padding-left: 0;
+}
+.THIS.apollo .card-footer {
+    display: block;
+    padding-top: 16px;
+    height: 3.15rem;
+}
+.THIS.apollo .radius-dd {
+    text-align: right;
+    font-weight: 600;
+}

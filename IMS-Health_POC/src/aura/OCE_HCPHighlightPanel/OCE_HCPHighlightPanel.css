@@ -1,0 +1,22 @@
+.THIS .apollo h4 {
+    margin-bottom: 0px !important;
+}
+.THIS .ims-border-around {
+  border: 0.0625rem solid #ced3d6;
+}
+.THIS .ims-border-bottom {
+  border-bottom: 0.0625rem solid #ced3d6;
+}
+.THIS .ims-border-top {
+  border-top: 0.0625rem solid #ced3d6;
+}
+.THIS .ims-border-right {
+  border-right: 0.0625rem solid #ced3d6;
+}
+.THIS .ims-border-left {
+  border-left: 0.0625rem solid #ced3d6;
+}
+.THIS ims-avatar--large {
+    width: 6rem;
+    height: 6rem;
+}

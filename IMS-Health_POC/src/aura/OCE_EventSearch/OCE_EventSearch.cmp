@@ -1,0 +1,107 @@
+<!-- 
+ * Created Date		: Dec 1st, 2016
+ * Developed By		: Binod Kumar, Comity Designs, Inc.
+ *
+ * Function			: @description - Event Search component for the HCP
+ * Support Email 	: binod@comitydesigns.com
+ * Version			: 1.0
+ *
+ * Modification Log
+ *
+ * Developer Name			User Story				Date			Version 			Description
+ *____________________________________________________________________________________________________
+ *
+ * Binod Kumar										Dec 1, 2016		1.1					@description - Initial commit
+ *
+  -->
+<aura:component implements="force:lightningQuickAction,flexipage:availableForRecordHome,force:hasRecordId" 
+                    description="Event Search for the HCP"
+                    access="global"
+                    controller="OCE_EventSearchController">
+
+    <!-- Id of the Contact the page hosting this component is showing -->
+    <aura:attribute name="recordId" type="Id" />
+    
+    <!-- Initializer -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <!-- Register to Pagination Event -->
+    <aura:handler event="c:OCE_DataTablePageChange" action="{!c.pageChange}"/>
+    
+    <!-- Component Attributes -->
+    <aura:attribute name="latestRecords" type="sObject[]" />
+    <aura:attribute name="page" type="integer" default="1"/>
+    <aura:attribute name="pages" type="integer" default="1"/>
+    <aura:attribute name="total" type="integer" default="0"/>
+    <aura:attribute name="pageSize" type="String" default="4" />
+    <aura:attribute name="radius" type="String" default="25" />
+    <aura:attribute name="selectedEventId" type="Id" />
+    
+    <!-- Apollo CSS -->
+    <ltng:require styles="{!$Resource.ApolloResources + '/apollo_namespace.css'}"/>
+	
+    <!-- Body Content -->
+    <div class="apollo container">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-12 radius-dd">
+                        <label>
+                            Search within &nbsp;
+                            <select onchange="{!c.onSelectChange}">
+                                <option value="25">{!$Label.c.OCE_UNITS_25_MILES}</option>
+                                <option value="50">{!$Label.c.OCE_UNITS_50_MILES}</option>
+                                <option value="100">{!$Label.c.OCE_UNITS_100_MILES}</option>
+                                <option value="150">{!$Label.c.OCE_UNITS_150_MILES}</option>
+                                <option value="200">{!$Label.c.OCE_UNITS_200_MILES}</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive no-bg">
+                    <table class="table" >
+                        <thead>
+                            <tr class="slds-text-heading--label">
+                                <th>{!$Label.c.OCE_NAME}</th>
+                                <th>{!$Label.c.OCE_SPEAKER}</th>
+                                <th>{!$Label.c.OCE_LOCATION}</th>
+                                <th>{!$Label.c.OCE_START_DATE }</th>
+                                <th>{!$Label.c.OCE_ACTION}</th>
+                            </tr>
+                        </thead>
+                        <tbody id="data">
+                            <aura:if isTrue="{!v.latestRecords.length > 0}">
+                                <aura:iteration var="row" items="{!v.latestRecords}">
+                                    <tr>
+                                        <td>{!row.Name}</td>
+                                        <td>{!row.Speaker__r.Name }</td>
+                                        <td>{!row.Location__r.Name}</td>
+                                        <td>
+                                            <ui:outputDate value="{!row.Start_Date__c}" format="MM/dd/yy"/>
+                                        </td>
+                                        <td>
+                                            <form class="event-form" onsubmit="{!c.registerForEvent}">
+                                                <input type="hidden" value="{!row.Id}" class="event-id" />
+                                                <button class="btn btn-primary btn-sm" type="submit">{!$Label.c.OCE_REGISTER_STR}</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </aura:iteration>
+                                <aura:set attribute="else">
+                                    <tr class="{!v.latestRecords.length == 0 ? 'xc-hidden' : ''}">
+                                        <td colspan="5">{!$Label.c.OCE_NO_EVENTS_STR}</td>
+                                    </tr>
+                                </aura:set>
+                            </aura:if>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <c:OCE_DataTablePaginator page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+            </div>
+        </div>
+    </div>
+</aura:component>

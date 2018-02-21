@@ -1,0 +1,19 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" 
+                description="OCE HCP highlight Panel for the Contact object"
+                access="global"
+                controller="OCE_HCPController">
+	<!-- Apollo CSS -->
+    <ltng:require styles="{!$Resource.ApolloResources + '/apollo_namespace.css'}" 
+                  scripts="{!$Resource.HighCharts_5_0_3 + '/code/highcharts.js'}"
+                   afterScriptsLoaded="{!c.initSalesChart}"
+                  />
+    <aura:attribute access="global" name="lineChart" type="Boolean" default="false" />
+    <aura:attribute access="global" name="stackedColumnChart" type="Boolean" default="true" />
+    <aura:attribute access="global" name="header" type="String" default="header" />
+    <aura:attribute access="global" name="xAxisLabel" type="String" default="x Axis" />
+    <aura:attribute access="global" name="yAxisLabel" type="String" default="y Axis" />
+    <aura:attribute access="global" name="minWidth" type="String" default="300px" />
+    <aura:attribute access="global" name="height" type="String" default="250px" />
+    <!-- embed Sales Chart Component to and pass the data points -->
+    <div id="HCP_Sales_Chart" style="min-width: 300px; height: 250px; margin: 0 auto"></div>
+</aura:component>

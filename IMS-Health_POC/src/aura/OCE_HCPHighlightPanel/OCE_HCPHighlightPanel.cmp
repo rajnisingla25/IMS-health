@@ -1,0 +1,88 @@
+<!-- 
+ * Created Date		: Nov 21, 2016
+ * Developed By		: Piyush Pandya, Comity Designs, Inc.
+ *
+ * Function			: @description - OCE HCP highlight Panel for the Contact object
+ * Support Email 	: piyush@comitydesigns.com
+ * Version			: 1.0
+ *
+ * Modification Log
+ *
+ * Developer Name			User Story				Date			Version 			Description
+ *____________________________________________________________________________________________________
+ *
+ * Piyush Pandya					POC-13				Nov 21, 2016			1.1					@description - Initial commit
+ *
+  -->
+    <aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" 
+                    description="OCE HCP highlight Panel for the Contact object"
+                    access="global"
+                    controller="OCE_HCPController">
+	<aura:attribute access="global" name="useLineChart" type="Boolean" default="true" />
+    <aura:attribute access="global" name="useStackedColumnChart" type="Boolean" default="false" />
+        
+    <!-- Initializer -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+        
+    <!-- HCP Profile -->
+	<aura:attribute access="public" name="hcpProfile" type="Contact"/>
+
+    <!-- Apollo CSS -->
+    <ltng:require styles="{!$Resource.ApolloResources + '/apollo_namespace.css'}"/>
+    
+
+    <div class="apollo">
+    <div class="container-fluid">
+        <!-- 3/4, 1/4 layout -->
+        <div class="row slds-p-top--x-small ims-border-around">
+            <div class="col-xs-7 ">
+                	<div class="slds-p-around--x-small">
+                    <div class="row slds-p-bottom--small">
+                        <div class="col-xs-4">
+                        <span class="slds-avatar ims-avatar--large">
+  							<img src="{!v.hcpProfile.Image_URL__c}" alt="{!v.hcpProfile.Name}" />
+						</span>		
+                        </div>
+                        <div class="col-xs-8">
+                            <ui:outputText value="{!v.hcpProfile.Salutation + ' ' + v.hcpProfile.Name}" class="slds-text-heading--medium slds-show"/>
+                            <ui:outputText value="{!v.hcpProfile.Account.Name}" class="slds-show"/>
+                            <ui:outputText value="{!v.hcpProfile.MailingStreet + ', ' + v.hcpProfile.MailingCity + ' ' + v.hcpProfile.MailingStateCode + ' ' + v.hcpProfile.MailingPostalCode}" class="slds-show"/>
+                            <ui:outputText value="{!v.hcpProfile.Phone + ' | ' + v.hcpProfile.Email}" class="slds-show"/>
+                        </div>
+                </div>
+                        <div class="row">
+                            <div class="col-xs-4"><ui:outputText value="{!$Label.c.Speciality}" class="slds-text-heading--label-normal"/>
+                                <ui:outputText value="{!v.hcpProfile.Speciality__c}" class="h4 slds-show"/></div>
+                            <div class="col-xs-4"><span class="slds-text-heading--label-normal">Expertise</span>
+                                <ui:outputText value="{!v.hcpProfile.Expertise__c}" title="{!v.hcpProfile.Expertise__c}" class="slds-show slds-truncate"/></div>
+                            <div class="col-xs-4"><span class="slds-text-heading--label-normal">TA Score/Brand Score</span>
+                                <h4>63/92</h4></div>
+                        </div>
+                  </div>  
+            </div>
+                    <div class="col-xs-2 slds-text-align--center">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <span class="slds-text-heading--label-normal">Writer Level</span>
+                                <h2>{!v.hcpProfile.Writer_Level__c}</h2>
+                            </div>
+                            </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                            <span class="slds-text-heading--label-normal">Call Plan</span>
+                            <div class="h2">3/5</div>
+                            <span class="slds-text-heading--label-normal">Actual vs. Planned</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="row">
+                            <div class="col-xs-12">
+                            <c:OCE_SalesChart lineChart="{!v.useLineChart}" stackedColumnChart="{!v.useStackedColumnChart}" header="Sales Data" xAxisLabel="" yAxisLabel="Prescription Filled" minWidth="300px" height="250px"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</aura:component>

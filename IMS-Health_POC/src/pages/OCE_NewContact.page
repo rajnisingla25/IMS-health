@@ -1,0 +1,29 @@
+<apex:page docType="html-5.0" standardController="Contact" extensions="OCE_NewContactController" sidebar="true" showHeader="true">
+    <apex:stylesheet value="{!URLFOR($Resource.ApolloResources, 'apollo.css')}"/>
+    <apex:form >
+		<div class="">        
+            <apex:outputPanel id="mainPanel">
+                <apex:outputPanel id="hcpSearchPanel">
+                    <apex:outputText style="" value="Search for HCP: "/>
+                    <apex:input value="{!searchString}" style="margin-right: 10px"/>
+                    <apex:commandButton value="Search" id="hcpSearchBtn" action="{!searchHCPs}" rerender="mainPanel" />
+                    <apex:commandButton value="HCP Request" action="{!createDCR}" id="hcpDCRBtn" rendered="{!ranSearch == true}"/>
+                </apex:outputPanel>
+                
+                <apex:outputPanel id="hcpResultPanel" rendered="{!ranSearch == true}">
+                    <hr/>
+                    <apex:repeat var="hcp" value="{!hcpContacts}" rendered="{!hcpContacts.size > 0}">
+                        <a href="one/one.app#/sObject/{!hcp.id}/view">
+                            <img src="{!hcp.Image_URL__c}" alt="{!hcp.Name}" class="img img-thumbnail" style="width:75px; height:auto;"/>
+                        </a>
+						<a href="one/one.app#/sObject/{!hcp.id}/view">
+	                        <apex:outputText styleClass="h4" value="{!IF(hcp.Title != '', hcp.Name + ',' + hcp.Title, hcp.Name)}" />
+                        </a>
+                        <br/>
+					</apex:repeat>
+                    <apex:outputText rendered="{!hcpContacts.size == 0}" value="No records found. Please submit an HCP Request." styleClass="h4"/>
+                </apex:outputPanel>                
+            </apex:outputPanel>
+        </div>
+    </apex:form>
+</apex:page>

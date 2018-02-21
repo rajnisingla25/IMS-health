@@ -1,0 +1,61 @@
+<!-- 
+ * Created Date		: Nov 30, 2016
+ * Developed By		: Anil Pilaka, Comity Designs, Inc.
+ *
+ * Function			: @description - OCE HCP Notification Panel for the Contact object
+ * Support Email 	: anil@comitydesigns.com
+ * Version			: 1.0
+ *
+ * Modification Log
+ *
+ * Developer Name			User Story				Date			Version 			Description
+ *____________________________________________________________________________________________________
+ *
+ * Anil Pilaka   			 POC-13				Nov 30, 2016			1.1					@description - Initial commit
+ *
+  -->
+
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" 
+                access="global" 
+                controller="OCE_HCPController">
+   
+    <!-- Scripts for Streaming API -->
+   <ltng:require scripts="/resource/JSCometD/cometd.js,
+             /resource/JSCometD/jquery-1.5.1.js,
+             /resource/JSCometD/json2.js,
+             /resource/JSCometD/jquery.cometd.js"
+        afterScriptsLoaded="{!c.init}"/>
+    
+   <aura:registerEvent name="notificationEvent" type="c:OCE_HCPNotificationEvent"/>
+   <aura:handler name="notificationEvent" event="c:OCE_HCPNotificationEvent"
+    action="{!c.handleEvent}"/>
+
+    <!-- Apollo CSS -->
+    <ltng:require styles="{!$Resource.ApolloResources + '/apollo_namespace.css'}"/>
+    <!-- Lightning Design System -->
+    <ltng:require styles="/resource/SLDS/assets/styles/salesforce-lightning-design-system-ltng.css" />
+    
+         
+    
+   <!-- Notification -->
+  <aura:attribute access="public" name="hcpNotif" type="HCP_Notifications__c"/>
+   
+   <!-- Notification Message -->
+  <div aura:id="notifPanel" class="apollo slds-hide" >
+    <div class="container-fluid">
+        <div class="billboard bg-light">
+              <h3>
+                  <span class="slds-avatar slds-avatar--circle">
+                  <img src="/resource/SLDS/assets/images/avatar2.jpg" height="30" width="30" alt="ADA assistant" />
+                  </span> 
+                  <ui:outputText class="slds-m-left--small" value="{!v.hcpNotif.Title__c}"/>
+              </h3>
+     		 <p class="billboard-description"><ui:outputText value="{!v.hcpNotif.Description__c}"/></p>
+     		 <div>
+       			 <ui:button class="btn btn-primary" press="{!c.updateNotifications}"><span>Acknowledge</span></ui:button>
+            </div>
+    	</div>
+    </div>
+  </div>   
+      
+</aura:component>

@@ -1,0 +1,31 @@
+<!-- 
+ * Created Date		: Dec 2nd, 2016
+ * Developed By		: Binod Kumar, Comity Designs, Inc.
+ *
+ * Function			: @description - Lightning DataTable Paginator
+ * Support Email 	: binod@comitydesigns.com
+ * Version			: 1.0
+ *
+ * Modification Log
+ *
+ * Developer Name			User Story				Date			Version 			Description
+ *____________________________________________________________________________________________________
+ *
+ * Binod Kumar										Dec 2, 2016		1.1					@description - Initial commit
+ *
+  -->
+<aura:component >
+    <!-- Component Attributes -->
+    <aura:attribute name="page" type="integer"/>
+    <aura:attribute name="pages" type="integer"/>
+    <aura:attribute name="total" type="integer"/>  
+    
+    <!-- Component Body Content -->
+    <nav class="pager">
+        <a class="{!v.page == 1 ? 'pager-prev disabled' : 'pager-prev'}" href="javascript:void(0);" onclick="{!c.previousPage}">{!$Label.c.OCE_PREVIOUS_STR}</a>
+        <div class="pager-count">
+            {!v.total}&nbsp;{!$Label.c.OCE_RECORDS_STR}&nbsp; • &nbsp;{!$Label.c.OCE_PAGE_STR}&nbsp;{!v.page} / {!v.pages}
+        </div>
+        <a class="{!v.page >= v.pages ? 'pager-next disabled' : 'pager-next'}" href="javascript:void(0);" onclick="{!c.nextPage}">{!$Label.c.OCE_NEXT_STR}</a>
+    </nav>
+</aura:component>

@@ -1,0 +1,11 @@
+<apex:page controller="BBComm_Controller" >
+    Test data comm
+    <apex:form >
+        Encoded Value:
+        <apex:outputText value="{!$CurrentPage.parameters.sk}"></apex:outputText>
+        <br/><br/>
+        Decoded Value:
+        <apex:outputText value="{!decodedValue}"></apex:outputText>
+        
+    </apex:form>
+</apex:page>

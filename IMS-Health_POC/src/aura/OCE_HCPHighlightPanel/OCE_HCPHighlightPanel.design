@@ -1,0 +1,5 @@
+<design:component>
+    <design:attribute name="useLineChart" label="Display Line Chart" description="Display Sales Data as Line Chart" />
+    <design:attribute name="useStackedColumnChart" label="Display Stacked Column Chart" description="Display Sales Data as Stacked Column Chart" />
+	
+</design:component>

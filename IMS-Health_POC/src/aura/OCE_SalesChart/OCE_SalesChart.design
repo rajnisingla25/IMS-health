@@ -1,0 +1,9 @@
+<design:component>
+	<design:attribute name="lineChart" label="Display Line Chart" description="Toggle to display line chart" />
+    <design:attribute name="stackedColumnChart" label="Display Stacked Column Chart" description="Toggle to display Stacked Column chart" />
+    <design:attribute name="xAxisLabel" label="x Axis Label" description="x Axis Label" />
+    <design:attribute name="yAxisLabel" label="y Axis Label" description="y Axis Label" />
+    <design:attribute name="header" label="Header Label" description="Header Label" />
+    <design:attribute name="minWidth" label="Min Width" description="Min Width in px" />
+    <design:attribute name="height" label="Height" description="Height in px" />
+</design:component>
